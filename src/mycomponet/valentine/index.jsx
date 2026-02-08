@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
@@ -7,7 +7,6 @@ export default function ValentineApp() {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [yourName, setYourName] = useState("");
-  const [phone, setPhone] = useState("");
   const [loveLetter, setLoveLetter] = useState("");
   const [partnerPhone, setPartnerPhone] = useState("+91");
   const [noPosition, setNoPosition] = useState({ top: "65%", left: "40%" });
