@@ -36,8 +36,11 @@ export default function ValentineApp() {
       return;
     }
 
-    // Send to WhatsApp
-    const message = `💖 Love Message 💖%0a%0aFrom: ${yourName}%0aTo: ${name}%0a%0a💌 Love Letter:%0a${loveLetter}%0a%0a❤️ Happy Valentine's Day! ❤️`;
+    const id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    localStorage.setItem(id, JSON.stringify({ yourName, name, loveLetter }));
+    
+    const shareURL = `${window.location.origin}/message?id=${id}`;
+    const message = `${shareURL}`;
     const whatsappURL = `https://wa.me/${partnerPhone.replace(/[^0-9]/g, '')}?text=${message}`;
     
     window.open(whatsappURL, '_blank');
@@ -151,7 +154,8 @@ export default function ValentineApp() {
           <div className="heart-symbol" style={{ fontSize: '180px' }}>💝</div>
 
           <h1 className="display-4 fw-bold fade-in">Thank You for Accepting My Love! 😍</h1>
-          <p className="fs-5 fade-in-delay mb-4">🌹 Message sent from {yourName} to {name} 🌹</p>
+          
+          <h2 className="my-5">{yourName} ❤️ {name}</h2>
           
           <div className="love-quote fade-in-delay-2 mb-3">
             <p className="fs-6 fst-italic" style={{ maxWidth: '500px', margin: '0 auto', lineHeight: '1.8' }}>
