@@ -1,0 +1,386 @@
+/* Background gradient - transparent/semi-transparent with Valentine image */
+.main-bg {
+  background: linear-gradient(135deg, rgba(255, 117, 140, 0.7), rgba(255, 126, 179, 0.7)),
+              url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920&q=80') center/cover no-repeat;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Falling Flowers */
+.flowers-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.flower {
+  position: absolute;
+  top: -50px;
+  font-size: 35px;
+  animation: fall linear infinite;
+}
+
+.flower:nth-child(1) { content: '🌸'; }
+.flower:nth-child(2) { content: '🌺'; }
+.flower:nth-child(3) { content: '🌼'; }
+.flower:nth-child(4) { content: '🌻'; }
+.flower:nth-child(5) { content: '🌷'; }
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Big Heart Symbol */
+.big-heart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 350px;
+  opacity: 0.2;
+  z-index: 0;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  25% { transform: translate(-50%, -50%) scale(1.15); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  75% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* Heart symbol for replacing images */
+.heart-symbol {
+  font-size: 120px;
+  animation: heartbeat 1.5s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 7 auto;
+}
+
+/* Floating hearts container */
+.hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Single heart style */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 22px;
+  animation: floatUp linear infinite;
+}
+
+/* Random positions */
+.heart:nth-child(odd) {
+  left: 25%;
+  animation-duration: 5s;
+}
+
+.heart:nth-child(even) {
+  left: 70%;
+  animation-duration: 6s;
+}
+
+/* Floating animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Card smooth look - transparent */
+.shadow {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  position: relative;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Transparent box for question screen */
+.transparent-box {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* Button hover effect */
+.btn:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+/* Form animations */
+.form-container {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input animations */
+.input-animated {
+  transition: all 0.3s ease;
+  border: 2px solid #e0e0e0;
+}
+
+.input-animated:focus {
+  border-color: #ff758c;
+  box-shadow: 0 0 15px rgba(255, 117, 140, 0.3);
+  transform: scale(1.02);
+}
+
+/* Button animation */
+.btn-animated {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.btn-animated:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 20px rgba(255, 117, 140, 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 117, 140, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 117, 140, 0.8); }
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+/* Love screen animations */
+.love-screen {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+.fade-in-delay {
+  animation: fadeIn 1s ease-in 0.3s both;
+}
+
+.fade-in-delay-2 {
+  animation: fadeIn 1s ease-in 0.6s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive Design for All Devices */
+
+/* Mobile devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .transparent-box {
+    padding: 2rem 1.5rem !important;
+    min-height: 250px !important;
+    margin: 0 15px;
+  }
+  
+  .transparent-box h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .heart-symbol {
+    font-size: 80px !important;
+  }
+  
+  .big-heart {
+    font-size: 200px !important;
+  }
+  
+  .form-container {
+    width: 95% !important;
+    max-width: 380px;
+    padding: 1.5rem !important;
+  }
+  
+  .form-container .heart-symbol {
+    font-size: 60px !important;
+  }
+  
+  .btn {
+    padding: 0.5rem 2rem !important;
+    font-size: 0.9rem;
+  }
+  
+  .love-screen h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  .love-screen .heart-symbol {
+    font-size: 120px !important;
+  }
+  
+  .love-quote p {
+    font-size: 0.85rem !important;
+    padding: 0 10px;
+  }
+  
+  .flower {
+    font-size: 25px !important;
+  }
+}
+
+/* Tablets (landscape phones, 576px to 767px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .transparent-box {
+    padding: 2.5rem !important;
+    margin: 0 20px;
+  }
+  
+  .heart-symbol {
+    font-size: 100px !important;
+  }
+  
+  .big-heart {
+    font-size: 250px !important;
+  }
+  
+  .form-container {
+    width: 90% !important;
+    max-width: 420px;
+  }
+  
+  .form-container .heart-symbol {
+    font-size: 70px !important;
+  }
+  
+  .love-screen h1 {
+    font-size: 2.2rem !important;
+  }
+  
+  .love-screen .heart-symbol {
+    font-size: 140px !important;
+  }
+}
+
+/* Small tablets (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .transparent-box {
+    padding: 3rem !important;
+  }
+  
+  .big-heart {
+    font-size: 280px !important;
+  }
+  
+  .form-container {
+    width: 500px !important;
+  }
+  
+  .love-screen .heart-symbol {
+    font-size: 160px !important;
+  }
+}
+
+/* Landscape mode for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .transparent-box {
+    padding: 1.5rem !important;
+    min-height: 200px !important;
+  }
+  
+  .transparent-box h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .heart-symbol {
+    font-size: 60px !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .big-heart {
+    font-size: 150px !important;
+  }
+  
+  .btn {
+    padding: 0.4rem 1.5rem !important;
+  }
+  
+  .form-container {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .love-screen h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .love-screen .heart-symbol {
+    font-size: 80px !important;
+  }
+  
+  .love-quote {
+    display: none;
+  }
+}
+
+/* Extra responsive utilities */
+.form-container,
+.transparent-box {
+  max-width: 95vw;
+}
+
+.love-quote p {
+  max-width: 90% !important;
+}
