@@ -28,10 +28,12 @@ export default function ValentineApp() {
 
   const moveNoButton = (e) => {
     e.preventDefault();
-    const randomTop = Math.floor(Math.random() * 80) + "%";
-    const randomLeft = Math.floor(Math.random() * 80) + "%";
-    setNoPosition({ top: randomTop, left: randomLeft });
     setNoText(noMessages[Math.floor(Math.random() * noMessages.length)]);
+    setTimeout(() => {
+      const randomTop = Math.floor(Math.random() * 80) + "%";
+      const randomLeft = Math.floor(Math.random() * 80) + "%";
+      setNoPosition({ top: randomTop, left: randomLeft });
+    }, 100);
   };
 
   const handleYesClick = () => {
