@@ -10,14 +10,28 @@ export default function ValentineApp() {
   const [loveLetter, setLoveLetter] = useState("");
   const [partnerPhone, setPartnerPhone] = useState("+91");
   const [noPosition, setNoPosition] = useState({ top: "65%", left: "40%" });
+  const [noText, setNoText] = useState("No 😢");
   const audioRef = useRef(null);
+
+  const noMessages = [
+    "Please? 🥺",
+    "Are you sure? 😭",
+    "Think again! 💔",
+    "Don't break my heart 😥",
+    "Give me a chance 🙏",
+    "Pretty please? 🌹",
+    "I'll be sad 😭",
+    "Reconsider? 💖"
+  ];
 
   // Music will play only when Yes is clicked
 
-  const moveNoButton = () => {
+  const moveNoButton = (e) => {
+    e.preventDefault();
     const randomTop = Math.floor(Math.random() * 80) + "%";
     const randomLeft = Math.floor(Math.random() * 80) + "%";
     setNoPosition({ top: randomTop, left: randomLeft });
+    setNoText(noMessages[Math.floor(Math.random() * noMessages.length)]);
   };
 
   const handleYesClick = () => {
@@ -78,10 +92,11 @@ export default function ValentineApp() {
 
             <button
               className="btn btn-danger px-5 py-2 position-absolute"
-              style={{ top: noPosition.top, left: noPosition.left, transition: 'all 0.3s ease' }}
+              style={{ top: noPosition.top, left: noPosition.left, transition: 'all 0.3s ease', touchAction: 'none' }}
               onMouseEnter={moveNoButton}
+              onTouchStart={(e) => { e.preventDefault(); moveNoButton(e); }}
             >
-              No 😢
+              {noText}
             </button>
           </div>
         </div>
