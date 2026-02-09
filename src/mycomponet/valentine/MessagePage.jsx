@@ -6,28 +6,21 @@ import "./style.css";
 export default function MessagePage() {
   const [searchParams] = useSearchParams();
   const audioRef = useRef(null);
-  const [data, setData] = useState(null);
   const [musicPlaying, setMusicPlaying] = useState(false);
   
-  useEffect(() => {
-    const id = searchParams.get('id');
-    if (id) {
-      const stored = localStorage.getItem(id);
-      if (stored) {
-        setData(JSON.parse(stored));
-      }
-    }
-  }, [searchParams]);
+  const name = searchParams.get('n') || '';
+  const yourName = searchParams.get('y') || '';
+  const loveLetter = searchParams.get('l') || '';
 
   useEffect(() => {
-    if (data && audioRef.current) {
+    if (audioRef.current) {
       audioRef.current.play().then(() => {
         setMusicPlaying(true);
       }).catch((error) => {
         console.log('Music play failed:', error);
       });
     }
-  }, [data]);
+  }, []);
 
   const playMusic = () => {
     if (audioRef.current) {
@@ -36,15 +29,13 @@ export default function MessagePage() {
     }
   };
 
-  if (!data) {
+  if (!name || !yourName || !loveLetter) {
     return (
       <div className="main-bg d-flex justify-content-center align-items-center vh-100">
-        <div className="text-white">Loading...</div>
+        <div className="text-white">Invalid link</div>
       </div>
     );
   }
-
-  const { name, yourName, loveLetter } = data;
 
   return (
     <div className="main-bg d-flex justify-content-center align-items-center vh-100 position-relative overflow-hidden">

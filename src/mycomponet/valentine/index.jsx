@@ -36,10 +36,7 @@ export default function ValentineApp() {
       return;
     }
 
-    const id = Date.now().toString(36) + Math.random().toString(36).substr(2);
-    localStorage.setItem(id, JSON.stringify({ yourName, name, loveLetter }));
-    
-    const shareURL = `${window.location.origin}/message?id=${id}`;
+    const shareURL = `${window.location.origin}/message?n=${encodeURIComponent(name)}&y=${encodeURIComponent(yourName)}&l=${encodeURIComponent(loveLetter)}`;
     const message = `${shareURL}`;
     const whatsappURL = `https://wa.me/${partnerPhone.replace(/[^0-9]/g, '')}?text=${message}`;
     
