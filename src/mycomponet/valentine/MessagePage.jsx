@@ -12,6 +12,8 @@ export default function MessagePage() {
   const yourName = searchParams.get('y') || '';
   const loveLetter = searchParams.get('l') || '';
 
+  console.log('Params:', { n: searchParams.get('n'), y: searchParams.get('y'), l: searchParams.get('l') });
+
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.play().then(() => {
@@ -29,10 +31,13 @@ export default function MessagePage() {
     }
   };
 
-  if (!name || !yourName || !loveLetter) {
+  if (!name && !yourName && !loveLetter) {
     return (
       <div className="main-bg d-flex justify-content-center align-items-center vh-100">
-        <div className="text-white">Invalid link</div>
+        <div className="text-white text-center">
+          <h2>Invalid link</h2>
+          <p>Debug: n={name}, y={yourName}, l={loveLetter}</p>
+        </div>
       </div>
     );
   }
