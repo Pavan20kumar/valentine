@@ -77,7 +77,8 @@ export default function MessagePage() {
         <h2 className="my-5">{yourName} ❤️ {name}</h2>
         
         <div className="bg-white text-dark p-4 rounded-4 shadow my-4 mx-auto" style={{ maxWidth: '600px' }}>
-          <h4 className="text-gradient mb-3">💌 {loveLetter} 💌</h4>
+          <h4 className="text-gradient mb-3">💌 Message from {yourName} 💌</h4>
+          <p className="fst-italic" style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>{loveLetter}</p>
         </div>
         
         <div className="love-quote fade-in-delay-2 mb-3">
