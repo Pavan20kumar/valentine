@@ -8,11 +8,19 @@ export default function MessagePage() {
   const audioRef = useRef(null);
   const [musicPlaying, setMusicPlaying] = useState(false);
   
-  const name = searchParams.get('n') || '';
-  const yourName = searchParams.get('y') || '';
-  const loveLetter = searchParams.get('l') || '';
-
-  console.log('Params:', { n: searchParams.get('n'), y: searchParams.get('y'), l: searchParams.get('l') });
+  let yourName = '';
+  let loveLetter = '';
+  
+  const encrypted = searchParams.get('d');
+  if (encrypted) {
+    try {
+      const decoded = JSON.parse(atob(encrypted));
+      yourName = decoded.y || '';
+      loveLetter = decoded.l || '';
+    } catch (e) {
+      console.error('Decryption failed:', e);
+    }
+  }
 
   useEffect(() => {
     if (audioRef.current) {
@@ -31,12 +39,12 @@ export default function MessagePage() {
     }
   };
 
-  if (!name && !yourName && !loveLetter) {
+  if (!yourName && !loveLetter) {
     return (
       <div className="main-bg d-flex justify-content-center align-items-center vh-100">
         <div className="text-white text-center">
           <h2>Invalid link</h2>
-          <p>Debug: n={name}, y={yourName}, l={loveLetter}</p>
+          <p>Debug: y={yourName}, l={loveLetter}</p>
         </div>
       </div>
     );
@@ -72,9 +80,9 @@ export default function MessagePage() {
       <div className="text-center text-white love-screen px-3">
         <div className="heart-symbol" style={{ fontSize: '180px' }}>💝</div>
 
-        <h1 className="display-4 fw-bold fade-in">🎉 {name} Accepted {yourName}'s Love! 🎉</h1>
+        <h1 className="display-4 fw-bold fade-in">🎉 {yourName} Accepted Your Love! 🎉</h1>
         
-        <h2 className="my-5">{yourName} ❤️ {name}</h2>
+        <h2 className="my-5">{yourName} ❤️</h2>
         
         <div className="bg-white text-dark p-4 rounded-4 shadow my-4 mx-auto" style={{ maxWidth: '600px' }}>
           <h4 className="text-gradient mb-3">💌 Message from {yourName} 💌</h4>

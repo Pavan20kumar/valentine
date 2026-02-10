@@ -5,11 +5,10 @@ import "./style.css";
 export default function ValentineApp() {
   const [showLove, setShowLove] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState("");
   const [yourName, setYourName] = useState("");
   const [loveLetter, setLoveLetter] = useState("");
   const [partnerPhone, setPartnerPhone] = useState("+91");
-  const [noPosition, setNoPosition] = useState({ top: "65%", left: "40%" });
+  const [noPosition, setNoPosition] = useState({ top: "70%", left: "60%" });
   const [noText, setNoText] = useState("No 😢");
   const audioRef = useRef(null);
 
@@ -24,16 +23,19 @@ export default function ValentineApp() {
     "Reconsider? 💖"
   ];
 
-  // Music will play only when Yes is clicked
-
   const moveNoButton = (e) => {
     e.preventDefault();
+    const positions = [
+      { top: "10%", left: "10%" },
+      { top: "10%", left: "70%" },
+      { top: "70%", left: "10%" },
+      { top: "70%", left: "70%" },
+      { top: "20%", left: "80%" },
+      { top: "80%", left: "20%" }
+    ];
+    const randomPos = positions[Math.floor(Math.random() * positions.length)];
+    setNoPosition(randomPos);
     setNoText(noMessages[Math.floor(Math.random() * noMessages.length)]);
-    setTimeout(() => {
-      const randomTop = Math.floor(Math.random() * 80) + "%";
-      const randomLeft = Math.floor(Math.random() * 80) + "%";
-      setNoPosition({ top: randomTop, left: randomLeft });
-    }, 100);
   };
 
   const handleYesClick = () => {
@@ -47,14 +49,15 @@ export default function ValentineApp() {
   };
 
   const submitReason = () => {
-    if (!yourName || !name || !partnerPhone || !loveLetter) {
+    if (!yourName || !partnerPhone || !loveLetter) {
       alert("Please fill all fields 💌");
       return;
     }
 
-    const shareURL = `${window.location.origin}/message?n=${encodeURIComponent(name)}&y=${encodeURIComponent(yourName)}&l=${encodeURIComponent(loveLetter)}`;
-    const message = `${shareURL}`;
-    const whatsappURL = `https://wa.me/${partnerPhone.replace(/[^0-9]/g, '')}?text=${message}`;
+    const encrypted = btoa(JSON.stringify({ y: yourName, l: loveLetter }));
+    const shareURL = `${window.location.origin}/message?d=${encodeURIComponent(encrypted)}`;
+    const message = `💖 I have something special for you! Click here: ${shareURL}`;
+    const whatsappURL = `https://wa.me/${partnerPhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappURL, '_blank');
     setShowLove(true);
@@ -88,13 +91,13 @@ export default function ValentineApp() {
           <h2 className="mb-5 text-white fw-bold" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Do you love me? ❤️</h2>
 
           <div className="d-flex justify-content-center gap-3">
-            <button className="btn btn-success px-5 py-2" onClick={handleYesClick}>
+            <button className="btn btn-success px-5 py-3" onClick={handleYesClick} style={{ position: 'relative', zIndex: 100 }}>
               Yes 💖
             </button>
 
             <button
-              className="btn btn-danger px-5 py-2 position-absolute"
-              style={{ top: noPosition.top, left: noPosition.left, transition: 'all 0.3s ease', touchAction: 'none' }}
+              className="btn btn-danger px-4 py-2 position-absolute"
+              style={{ top: noPosition.top, left: noPosition.left, transition: 'all 0.3s ease' }}
               onMouseEnter={moveNoButton}
               onTouchStart={(e) => { e.preventDefault(); moveNoButton(e); }}
             >
@@ -120,14 +123,6 @@ export default function ValentineApp() {
             placeholder="Your Name 💖"
             value={yourName}
             onChange={(e) => setYourName(e.target.value)}
-          />
-
-          <input
-            type="text"
-            className="form-control mb-3 input-animated"
-            placeholder="Partner Name 💖"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
           />
 
           <input
@@ -169,7 +164,7 @@ export default function ValentineApp() {
 
           <h1 className="display-4 fw-bold fade-in">Thank You for Accepting My Love! 😍</h1>
           
-          <h2 className="my-5">{yourName} ❤️ {name}</h2>
+          <h2 className="my-5">{yourName} ❤️</h2>
           
           <div className="love-quote fade-in-delay-2 mb-3">
             <p className="fs-6 fst-italic" style={{ maxWidth: '500px', margin: '0 auto', lineHeight: '1.8' }}>
